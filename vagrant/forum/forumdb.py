@@ -3,6 +3,7 @@
 # 
 
 import psycopg2
+import bleach
 
 ## Get posts from database.
 def GetAllPosts():
@@ -16,7 +17,7 @@ def GetAllPosts():
     DB = psycopg2.connect("dbname=forum");
     cur = DB.cursor()
     cur.execute("SELECT time, content FROM posts ORDER BY time DESC")
-    posts = [{'content': str(row[1]), 'time': str(row[0])} for row in cur.fetchall()]
+    posts = [{'content': str(bleach.clean(row[1])), 'time': str(row[0])} for row in cur.fetchall()]
     DB.close()
     return posts
 
