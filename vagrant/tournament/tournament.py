@@ -13,14 +13,30 @@ def connect():
 
 def deleteMatches():
     """Remove all the match records from the database."""
+    db = connect()
+    cur = db.cursor()
+    cur.execute("DELETE FROM Matches")
+    db.commit()
+    db.close()
 
 
 def deletePlayers():
     """Remove all the player records from the database."""
+    db = connect()
+    cur = db.cursor()
+    cur.execute("DELETE FROM Players")
+    db.commit()
+    db.close()
 
 
 def countPlayers():
     """Returns the number of players currently registered."""
+    db = connect()
+    cur = db.cursor()
+    cur.execute("SELECT count(*) FROM Players")
+    numOfPlayers = cur.fetchone()[0]
+    db.close()
+    return numOfPlayers
 
 
 def registerPlayer(name):
@@ -32,6 +48,11 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
+    db = connect()
+    cur = db.cursor()
+    cur.execute("INSERT INTO Players (name) VALUES (%s)", (name,))
+    db.commit()
+    db.close()
 
 
 def playerStandings():
@@ -47,6 +68,12 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
+    db = connect()
+    cur = db.cursor()
+    cur.execute("SELECT id, name, wins, matches FROM PlayerStandings")
+    standingOfPlayers = cur.fetchall()
+    db.close()
+    return standingOfPlayers
 
 
 def reportMatch(winner, loser):
@@ -56,6 +83,11 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
+    db = connect()
+    cur = db.cursor()
+    cur.execute("INSERT INTO Matches (winner, loser) VALUES (%s, %s)", (winner, loser,))
+    db.commit()
+    db.close()
  
  
 def swissPairings():
@@ -73,5 +105,14 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
+    pairingsOfSwiss = []
+    db = connect()
+    cur = db.cursor()
+    cur.execute("SELECT id, name FROM PlayerStandings")
+    result = cur.fetchall()
+    for i in xrange(0, len(result) - 1, 2):
+        pairingsOfSwiss.append((result[i][0], result[i][1], result[i + 1][0], result[i + 1][1]))
+    db.close()
+    return pairingsOfSwiss
 
 
