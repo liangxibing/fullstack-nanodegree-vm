@@ -8,10 +8,10 @@ Git & VirtualBox & Vagrant installation please refer to https://udacity.atlassia
 
 How to run
 =============
-git clone git@github.com:liangxibing/fullstack-nanodegree-vm.git fullstack
-cd ./fullstack/vagrant
-vagrant up
-vagrant ssh
-cd /vagrant/tournament
-python tournament_test.py
+1. git clone git@github.com:liangxibing/fullstack-nanodegree-vm.git fullstack
+2. cd ./fullstack/vagrant
+3. vagrant up
+4. vagrant ssh
+5. cd /vagrant/tournament
+6. python tournament_test.py
 
