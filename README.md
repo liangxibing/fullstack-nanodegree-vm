@@ -16,9 +16,7 @@ Download codes and start VM
 Initialize database
 =============
 1. ```cd /vagrant/tournament```
-2. ```psql```
-3. ```\i tournament.sql```
-4. ```\q```
+2. ```psql -f tournament.sql```
 
 Run tournament program
 =============
