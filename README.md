@@ -17,7 +17,7 @@ Initialize database
 =============
 1. ```cd /vagrant/tournament```
 2. ```psql```
-3. ```\i tournament```
+3. ```\i tournament.sql```
 
 Run tournament program
 =============
