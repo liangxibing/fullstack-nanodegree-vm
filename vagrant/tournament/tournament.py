@@ -16,6 +16,7 @@ def connect(database_name="tournament"):
         return db, cursor
     except:
         print("Fail to connect database!")
+        raise
 
 
 def deleteMatches():
