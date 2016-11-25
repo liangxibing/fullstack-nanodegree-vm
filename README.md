@@ -8,7 +8,7 @@ Git & VirtualBox & Vagrant installation please refer to [Vagrant VM Installation
 
 Download codes and start VM
 =============
-1. ```git clone git@github.com:liangxibing/fullstack-nanodegree-vm.git```
+1. ```git clone git@github.com:liangxibing/fullstack-nanodegree-vm.git fullstack```
 2. ```cd ./fullstack/vagrant```
 3. ```vagrant up```
 4. ```vagrant ssh```
