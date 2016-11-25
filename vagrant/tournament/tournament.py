@@ -15,7 +15,7 @@ def connect(database_name="tournament"):
         cursor = db.cursor()
         return db, cursor
     except:
-        print("Fail to connect database")
+        print("Fail to connect database!")
 
 
 def deleteMatches():
@@ -61,11 +61,15 @@ def registerPlayer(name):
     """
     db, cursor = connect()
 
-    query = "INSERT INTO Players (name) VALUES (%s)"
-    parameter = (name, )
-    cursor.execute(query, parameter)
+    try:
+        query = "INSERT INTO Players (name) VALUES (%s)"
+        parameter = (name, )
+        cursor.execute(query, parameter)
+        db.commit()
+    except:
+        db.rollback()
+        print("Fail to register player!")
 
-    db.commit()
     db.close()
 
 
@@ -101,11 +105,15 @@ def reportMatch(winner, loser):
     """
     db, cursor = connect()
 
-    query = "INSERT INTO Matches (winner, loser) VALUES (%s, %s)"
-    parameter = (winner, loser,)
-    cursor.execute(query, parameter)
+    try:
+        query = "INSERT INTO Matches (winner, loser) VALUES (%s, %s)"
+        parameter = (winner, loser,)
+        cursor.execute(query, parameter)
+        db.commit()
+    except:
+        db.rollback()
+        print("Fail to report match!")
 
-    db.commit()
     db.close()
 
 
